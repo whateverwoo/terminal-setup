@@ -11,7 +11,8 @@ terminal-setup/
 ├── zshrc                → ~/.zshrc
 ├── p10k.zsh             → ~/.p10k.zsh
 ├── tmux.conf            → ~/.tmux.conf
-└── ghostty.config       → ~/Library/Application Support/com.mitchellh.ghostty/config.ghostty
+├── ghostty.config       → ~/Library/Application Support/com.mitchellh.ghostty/config.ghostty
+└── yazi/                → ~/.config/yazi/
 ```
 
 ---
@@ -37,6 +38,7 @@ cp p10k.zsh              ~/.p10k.zsh
 cp tmux.conf             ~/.tmux.conf
 mkdir -p "$HOME/Library/Application Support/com.mitchellh.ghostty"
 cp ghostty.config "$HOME/Library/Application Support/com.mitchellh.ghostty/config.ghostty"
+mkdir -p ~/.config/yazi && cp yazi/*.toml ~/.config/yazi/ && ya pkg install
 
 # 5. Put your API key in ~/.env (sourced by ~/.zshrc)
 printf 'export OPENAI_API_KEY="sk-..."\n' > ~/.env

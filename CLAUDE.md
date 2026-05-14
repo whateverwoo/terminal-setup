@@ -14,6 +14,7 @@ This is a **dotfiles repository**, not an application. Each tracked file is a co
 | `p10k.zsh` | `~/.p10k.zsh` | sourced by `~/.zshrc` |
 | `tmux.conf` | `~/.tmux.conf` | `C-a r` (prefix + r) inside tmux |
 | `ghostty.config` | `~/Library/Application Support/com.mitchellh.ghostty/config.ghostty` | `Cmd+Shift+,` in Ghostty |
+| `yazi/theme.toml`, `yazi/package.toml` | `~/.config/yazi/` | next yazi launch; run `ya pkg install` after copying `package.toml` |
 
 When editing a config here, the user's live system copy at the destination above is **not** automatically updated. If a change needs to be tested live, the file must be copied to its destination first.
 
