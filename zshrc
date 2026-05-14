@@ -37,7 +37,9 @@ setopt AUTO_CD AUTO_PUSHD PUSHD_IGNORE_DUPS PUSHD_SILENT
 DISABLE_AUTO_TITLE="true"
 
 # ── Env ─────────────────────────────────────────────────────────
-export OPENAI_API_KEY="REPLACE_WITH_YOUR_KEY"
+# Secrets live in ~/.env (chmod 600, not tracked). Example:
+#   export OPENAI_API_KEY="sk-..."
+[ -f ~/.env ] && source ~/.env
 export CLAUDE_CODE_NO_FLICKER=1
 export PATH="$HOME/.local/bin:$PATH"
 

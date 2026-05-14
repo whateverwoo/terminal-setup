@@ -38,8 +38,9 @@ cp tmux.conf             ~/.tmux.conf
 mkdir -p "$HOME/Library/Application Support/com.mitchellh.ghostty"
 cp ghostty.config "$HOME/Library/Application Support/com.mitchellh.ghostty/config.ghostty"
 
-# 5. Set your API key in ~/.zshrc (replace REPLACE_WITH_YOUR_KEY)
-#    The placeholder is on the OPENAI_API_KEY line
+# 5. Put your API key in ~/.env (sourced by ~/.zshrc)
+printf 'export OPENAI_API_KEY="sk-..."\n' > ~/.env
+chmod 600 ~/.env
 
 # 6. Open Ghostty - Zinit auto-installs on first launch
 #    Powerlevel10k loads from ~/.p10k.zsh automatically
