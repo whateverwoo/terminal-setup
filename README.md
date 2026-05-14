@@ -25,7 +25,7 @@ Run on a fresh Mac:
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # 2. Install all CLI tools, apps, and fonts
-brew install git zsh fzf fd bat ripgrep zoxide gh lazygit tree watch tmux
+brew install git zsh fzf fd bat ripgrep zoxide gh lazygit tree watch tmux yazi
 brew install --cask ghostty sublime-text font-jetbrains-mono-nerd-font
 
 # 3. Install fzf shell integration
@@ -71,6 +71,7 @@ Done. The next sections explain what each piece does.
 | `tree` | Directory tree view |
 | `watch` | Re-run command periodically |
 | `tmux` | Terminal multiplexer |
+| `yazi` | Terminal file manager (use `y` wrapper to cd to last dir on quit) |
 
 ### Apps (`brew install --cask`)
 
