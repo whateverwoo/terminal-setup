@@ -44,6 +44,10 @@ mkdir -p ~/.config/yazi && cp yazi/*.toml ~/.config/yazi/ && ya pkg install
 printf 'export OPENAI_API_KEY="sk-..."\n' > ~/.env
 chmod 600 ~/.env
 
+# 5b. Optional: machine-specific, non-secret config (absolute paths,
+#     per-machine aliases, JAVA_HOME). Keeps `cp zshrc ~/.zshrc` safe.
+#     touch ~/.zshrc.local
+
 # 6. Open Ghostty - Zinit auto-installs on first launch
 #    Powerlevel10k loads from ~/.p10k.zsh automatically
 
@@ -135,7 +139,8 @@ Config: `~/.zshrc`
 - Directory navigation: `AUTO_CD`, `AUTO_PUSHD` (cd by typing folder name)
 - Case-insensitive tab completion
 - fzf keybindings auto-sourced
-- nvm sourced near the end if `~/.nvm` exists (install separately; the line is a no-op without it)
+- Two untracked side files: `~/.env` for **secrets** (chmod 600), `~/.zshrc.local` for **machine-specific non-secret** config — so this `zshrc` stays portable and copyable
+- nvm sourced at the end if `~/.nvm` exists (install separately; the line is a no-op without it)
 
 ### Built-in Aliases
 

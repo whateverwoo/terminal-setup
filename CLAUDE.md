@@ -23,7 +23,10 @@ When editing a config here, the user's live system copy at the destination above
 - **Theme: Catppuccin Mocha everywhere.** Colors are hardcoded in `tmux.conf` (status bar / borders), `p10k.zsh` (prompt segments), and `ghostty.config` (`theme = Catppuccin Mocha`). Changing one tool's palette without the others creates visible drift. The canonical hex values are listed in `README.md` under "Color Reference."
 - **Prefix is `C-a`, not `C-b`.** `tmux.conf` rebinds the prefix; any new tmux bindings must assume `C-a`.
 - **Zinit is the zsh plugin manager.** New plugins go through `zinit light` / `zinit snippet` in `zshrc`, not `oh-my-zsh` directly (OMZ plugins are pulled in as Zinit snippets).
-- **Secrets live in `~/.env`, sourced by `zshrc` line ~42.** Never inline API keys in `zshrc` — add them to `~/.env` (chmod 600, untracked). `~/.env` is intentionally outside this repo.
+- **Two untracked files hold everything that can't be committed, split by *why*:**
+  - `~/.env` (chmod 600) — **secrets only**. Never inline API keys in `zshrc`; add them here. Sourced by `zshrc` line ~42.
+  - `~/.zshrc.local` — **machine-specific but non-secret** config: absolute paths, per-machine aliases, `JAVA_HOME`, etc. Sourced on the next line.
+  Do not put non-secrets in `~/.env` — its `chmod 600` is a security boundary, not a junk drawer. Anything portable belongs in tracked `zshrc` instead.
 
 ## Editing `p10k.zsh`
 

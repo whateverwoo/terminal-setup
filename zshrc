@@ -40,6 +40,7 @@ DISABLE_AUTO_TITLE="true"
 # Secrets live in ~/.env (chmod 600, not tracked). Example:
 #   export OPENAI_API_KEY="sk-..."
 [ -f ~/.env ] && source ~/.env
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local  # machine-specific, non-secret
 export CLAUDE_CODE_NO_FLICKER=1
 export PATH="$HOME/.local/bin:$PATH"
 
@@ -48,7 +49,6 @@ export PATH="$HOME/.local/bin:$PATH"
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 
 # ── Aliases ──────────────────────────────────────────────────────
-alias jupyter=" /Users/timothywu/opt/anaconda3/bin/jupyter_mac.command"
 alias cat='bat --paging=never'
 alias find='fd'
 alias grep='rg'
