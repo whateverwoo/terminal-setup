@@ -107,6 +107,7 @@ Config: `~/Library/Application Support/com.mitchellh.ghostty/config.ghostty`
 - Cursor: bar style, no blink
 - Background: 96% opacity, blur radius 20
 - Window: decorations on, padding 12×10
+- Titlebar: native tabs style (`macos-titlebar-style = tabs`)
 - Shell integration: zsh (OSC 133 for cursor, sudo prompts, title)
 - Scrollback: 10,000 lines
 
@@ -134,6 +135,7 @@ Config: `~/.zshrc`
 - Directory navigation: `AUTO_CD`, `AUTO_PUSHD` (cd by typing folder name)
 - Case-insensitive tab completion
 - fzf keybindings auto-sourced
+- nvm sourced near the end if `~/.nvm` exists (install separately; the line is a no-op without it)
 
 ### Built-in Aliases
 
@@ -339,7 +341,7 @@ echo $FZF_DEFAULT_COMMAND                  # should show fd command
 → Don't run Claude from your home directory. `cd` into a project folder first.
 
 **Tabs disabled in Ghostty**
-→ Set `window-decoration = true` in Ghostty config (already set in `ghostty.config`).
+→ Needs both `window-decoration = true` and `macos-titlebar-style = tabs` in Ghostty config (both already set in `ghostty.config`).
 
 **`p10k configure` overwrites my colors**
 → Re-apply Catppuccin colors after the wizard (see Color Reference above), or just copy `p10k.zsh` from this folder.
