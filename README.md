@@ -120,8 +120,8 @@ Config: `~/Library/Application Support/com.mitchellh.ghostty/config.ghostty`
 | `Cmd + W` | Close tab |
 | `Cmd + [1-9]` | Switch to tab N |
 | `Cmd + Shift + ,` | Reload config |
-| `Cmd + D` | Split pane horizontally |
-| `Cmd + Shift + D` | Split pane vertically |
+| `Cmd + D` | Split right |
+| `Cmd + Shift + D` | Split down |
 
 ---
 
