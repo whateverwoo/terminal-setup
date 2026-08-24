@@ -44,6 +44,10 @@ mkdir -p ~/.config/yazi && cp yazi/*.toml ~/.config/yazi/ && ya pkg install
 printf 'export OPENAI_API_KEY="sk-..."\n' > ~/.env
 chmod 600 ~/.env
 
+# 5b. Optional: machine-specific, non-secret config (absolute paths,
+#     per-machine aliases, JAVA_HOME). Keeps `cp zshrc ~/.zshrc` safe.
+#     touch ~/.zshrc.local
+
 # 6. Open Ghostty - Zinit auto-installs on first launch
 #    Powerlevel10k loads from ~/.p10k.zsh automatically
 
@@ -107,6 +111,7 @@ Config: `~/Library/Application Support/com.mitchellh.ghostty/config.ghostty`
 - Cursor: bar style, no blink
 - Background: 96% opacity, blur radius 20
 - Window: decorations on, padding 12×10
+- Titlebar: native tabs style (`macos-titlebar-style = tabs`)
 - Shell integration: zsh (OSC 133 for cursor, sudo prompts, title)
 - Scrollback: 10,000 lines
 
@@ -119,8 +124,8 @@ Config: `~/Library/Application Support/com.mitchellh.ghostty/config.ghostty`
 | `Cmd + W` | Close tab |
 | `Cmd + [1-9]` | Switch to tab N |
 | `Cmd + Shift + ,` | Reload config |
-| `Cmd + D` | Split pane horizontally |
-| `Cmd + Shift + D` | Split pane vertically |
+| `Cmd + D` | Split right |
+| `Cmd + Shift + D` | Split down |
 
 ---
 
@@ -134,6 +139,7 @@ Config: `~/.zshrc`
 - Directory navigation: `AUTO_CD`, `AUTO_PUSHD` (cd by typing folder name)
 - Case-insensitive tab completion
 - fzf keybindings auto-sourced
+- Two untracked side files: `~/.env` for **secrets** (chmod 600), `~/.zshrc.local` for **machine-specific non-secret** config — so this `zshrc` stays portable and copyable
 
 ### Built-in Aliases
 
@@ -339,7 +345,7 @@ echo $FZF_DEFAULT_COMMAND                  # should show fd command
 → Don't run Claude from your home directory. `cd` into a project folder first.
 
 **Tabs disabled in Ghostty**
-→ Set `window-decoration = true` in Ghostty config (already set in `ghostty.config`).
+→ Needs both `window-decoration = true` and `macos-titlebar-style = tabs` in Ghostty config (both already set in `ghostty.config`).
 
 **`p10k configure` overwrites my colors**
 → Re-apply Catppuccin colors after the wizard (see Color Reference above), or just copy `p10k.zsh` from this folder.
