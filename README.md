@@ -140,7 +140,6 @@ Config: `~/.zshrc`
 - Case-insensitive tab completion
 - fzf keybindings auto-sourced
 - Two untracked side files: `~/.env` for **secrets** (chmod 600), `~/.zshrc.local` for **machine-specific non-secret** config — so this `zshrc` stays portable and copyable
-- nvm sourced at the end if `~/.nvm` exists (install separately; the line is a no-op without it)
 
 ### Built-in Aliases
 
