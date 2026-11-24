@@ -22,8 +22,11 @@ terminal-setup/
 Run on a fresh Mac:
 
 ```sh
-# 1. Install Homebrew
+# 1. Install Homebrew, then put it on PATH for login shells (Apple Silicon
+#    installs to /opt/homebrew, which is not on PATH by default)
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+echo 'eval "$(/opt/homebrew/bin/brew shellenv zsh)"' >> ~/.zprofile
+eval "$(/opt/homebrew/bin/brew shellenv zsh)"
 
 # 2. Install all CLI tools, apps, and fonts
 brew install git zsh fzf fd bat ripgrep zoxide gh lazygit tree watch tmux yazi sevenzip poppler
