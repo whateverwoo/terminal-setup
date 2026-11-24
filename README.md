@@ -22,8 +22,11 @@ terminal-setup/
 Run on a fresh Mac:
 
 ```sh
-# 1. Install Homebrew
+# 1. Install Homebrew, then put it on PATH for login shells (Apple Silicon
+#    installs to /opt/homebrew, which is not on PATH by default)
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+echo 'eval "$(/opt/homebrew/bin/brew shellenv zsh)"' >> ~/.zprofile
+eval "$(/opt/homebrew/bin/brew shellenv zsh)"
 
 # 2. Install all CLI tools, apps, and fonts
 brew install git zsh fzf fd bat ripgrep zoxide gh lazygit tree watch tmux yazi sevenzip poppler
@@ -40,9 +43,10 @@ mkdir -p "$HOME/Library/Application Support/com.mitchellh.ghostty"
 cp ghostty.config "$HOME/Library/Application Support/com.mitchellh.ghostty/config.ghostty"
 mkdir -p ~/.config/yazi && cp yazi/*.toml ~/.config/yazi/ && ya pkg install
 
-# 5. Put your API key in ~/.env (sourced by ~/.zshrc)
-printf 'export OPENAI_API_KEY="sk-..."\n' > ~/.env
-chmod 600 ~/.env
+# 5. Put your API key in ~/.env (sourced by ~/.zshrc).
+#    Skips if ~/.env already exists (never clobbers existing secrets);
+#    umask 077 creates it as 600 from the start, with no world-readable window.
+[ -f ~/.env ] || (umask 077 && printf 'export OPENAI_API_KEY="sk-..."\n' > ~/.env)
 
 # 5b. Optional: machine-specific, non-secret config (absolute paths,
 #     per-machine aliases, JAVA_HOME). Keeps `cp zshrc ~/.zshrc` safe.
@@ -53,6 +57,9 @@ chmod 600 ~/.env
 
 # 7. macOS: grant Ghostty Full Disk Access
 #    System Settings → Privacy & Security → Full Disk Access → add Ghostty
+
+# 8. macOS: grant Ghostty Accessibility (needed for the global Cmd+` quick terminal)
+#    System Settings → Privacy & Security → Accessibility → add Ghostty
 ```
 
 Done. The next sections explain what each piece does.
@@ -119,7 +126,7 @@ Config: `~/Library/Application Support/com.mitchellh.ghostty/config.ghostty`
 
 | Shortcut | Action |
 |----------|--------|
-| `Cmd + `` ` `` | Toggle quick terminal (global, works from any app) |
+| `Cmd + `` ` `` | Toggle quick terminal (global, works from any app; needs Accessibility permission) |
 | `Cmd + T` | New tab |
 | `Cmd + W` | Close tab |
 | `Cmd + [1-9]` | Switch to tab N |
@@ -186,7 +193,7 @@ Config: `~/.p10k.zsh` (1720 lines — included as `p10k.zsh` in this folder)
 
 **Layout:**
 ```
-~/path/to/dir  git:(branch)              status  time  jobs  py-env  ...
+~/path/to/dir main ⇡1 !2 ?3              status  exec-time  jobs  py-env  ...  HH:MM:SS
 ❯ _
 ```
 - Two-line prompt with blank line between commands
@@ -205,8 +212,18 @@ Config: `~/.p10k.zsh` (1720 lines — included as `p10k.zsh` in this folder)
 | Git clean | `#a6e3a1` | green |
 | Git modified | `#fab387` | peach |
 | Git untracked | `#f38ba8` | pink/red |
+| Git conflicted | `#f38ba8` | pink/red |
+| Git status loading / stale | `#6c7086` | muted gray |
 | Prompt char OK | `#a6e3a1` | green |
 | Prompt char error | `#f38ba8` | pink/red |
+| Exit status OK / background jobs | `#a6e3a1` | green |
+| Exit status error | `#f38ba8` | pink/red |
+| Command execution time | `#f9e2af` | yellow |
+| Time | `#6c7086` | muted gray |
+
+Git colors are set in `my_git_formatter` inside `p10k.zsh` (the gitstatus path that is
+used normally); the `POWERLEVEL9K_VCS_*_FOREGROUND` values only apply to the vcs_info
+fallback. Change both if you change the palette.
 
 To regenerate from scratch: `p10k configure` (interactive wizard).
 
@@ -276,7 +293,7 @@ In copy mode (`C-a [`): use `Space` to start selecting, `Enter` to copy, then `C
 
 ### Status Bar Layout
 ```
-[session_name]   ... window 1  window 2*  ...    current-dir | HH:MM
+[session_name]   ... window 1  window 2*  ...    current-dir  git-branch | HH:MM
 ```
 Active window is highlighted in purple (`#cba6f7`).
 

@@ -34,13 +34,11 @@ setopt HIST_IGNORE_DUPS HIST_IGNORE_SPACE SHARE_HISTORY
 
 # ── Directory navigation ─────────────────────────────────────────
 setopt AUTO_CD AUTO_PUSHD PUSHD_IGNORE_DUPS PUSHD_SILENT
-DISABLE_AUTO_TITLE="true"
 
 # ── Env ─────────────────────────────────────────────────────────
 # Secrets live in ~/.env (chmod 600, not tracked). Example:
 #   export OPENAI_API_KEY="sk-..."
 [ -f ~/.env ] && source ~/.env
-[ -f ~/.zshrc.local ] && source ~/.zshrc.local  # machine-specific, non-secret
 export CLAUDE_CODE_NO_FLICKER=1
 export PATH="$HOME/.local/bin:$PATH"
 
@@ -69,3 +67,7 @@ function y() {
 
 # ── p10k ─────────────────────────────────────────────────────────
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# ── Machine-local overrides ─────────────────────────────────────
+# Non-secret, per-machine config. Sourced last so it can override anything above.
+[[ ! -f ~/.zshrc.local ]] || source ~/.zshrc.local  # `||` form keeps $? = 0 when absent (no red first prompt)

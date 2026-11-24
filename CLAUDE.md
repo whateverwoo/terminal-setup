@@ -24,8 +24,8 @@ When editing a config here, the user's live system copy at the destination above
 - **Prefix is `C-a`, not `C-b`.** `tmux.conf` rebinds the prefix; any new tmux bindings must assume `C-a`.
 - **Zinit is the zsh plugin manager.** New plugins go through `zinit light` / `zinit snippet` in `zshrc`, not `oh-my-zsh` directly (OMZ plugins are pulled in as Zinit snippets).
 - **Two untracked files hold everything that can't be committed, split by *why*:**
-  - `~/.env` (chmod 600) — **secrets only**. Never inline API keys in `zshrc`; add them here. Sourced by `zshrc` line ~42.
-  - `~/.zshrc.local` — **machine-specific but non-secret** config: absolute paths, per-machine aliases, `JAVA_HOME`, etc. Sourced on the next line.
+  - `~/.env` (chmod 600) — **secrets only**. Never inline API keys in `zshrc`; add them here. Sourced near the top of `zshrc` (Env section).
+  - `~/.zshrc.local` — **machine-specific but non-secret** config: absolute paths, per-machine aliases, `JAVA_HOME`, etc. Sourced at the very end of `zshrc` so it can override anything tracked.
   Do not put non-secrets in `~/.env` — its `chmod 600` is a security boundary, not a junk drawer. Anything portable belongs in tracked `zshrc` instead.
 
 ## Editing `p10k.zsh`
